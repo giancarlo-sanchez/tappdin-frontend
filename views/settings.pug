@@ -1,0 +1,74 @@
+extends layout
+block content
+  head
+    link(rel="stylesheet" href="/styles/settings.css")
+    //- link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous')
+  body
+    .account-seettings
+      .main
+        .box
+          .content
+            .top-header
+              h2 Account Settings
+            .response-handler
+              if success
+                p.response-handler__success-msg=message
+              else
+                p.response-handler__failure-msg=message
+            .filter
+              //- h2 Profile
+            h3.section-title.settings__section-title Profile Settings
+            .settings-section
+              //- p.section-title Profile Settings
+              img.form-profile__picture(src="https://i2.wp.com/untappd.akamaized.net/site/assets/images/default_avatar_v3_gravatar.jpg?ssl=1")
+              form(class="settings-form" method="post" action="/settings/update")
+
+                    .form-group
+                        label(for='username') Username
+                        input#username.form-control(type='text', name="username", value=user.username)
+                    .form-group
+                        label(for='email') Email address
+                        input#email.form-control(type='email', name="email", value=user.email)
+                    .form-group
+                        label(for='firstName') First Name
+                        input#first-name.form-control(type='text' name='firstName' value=user.firstName)
+                    .form-group
+                        label(for='lastName') Last Name
+                        input#last-name.form-control(type='text' name='lastName' value=user.lastName)
+                    .form-group
+                        label(for='about-you') About You
+                        textarea#about-you.form-control(name='about-you')=user.aboutYou
+                    button.btn.btn-primary(type='submit') Update Settings
+            .settings-section#password-section
+              h3.password__section-title Change Password
+              form(class="password-form" method="post" action="/settings/change-password")
+                .form-group#password
+                  label(for='password') Old Password
+                  input#password.form-control(type='password' name='oldPassword')
+                .form-group#new-password
+                  label(for='new-password') New Password
+                  input#new-password.form-control(type="password" name='newPassword')
+                .btn__password-container
+                  button.btn.password-btn(type="submit") Change Password
+            //- .settings-section#social-section
+            //-   p.social__section-title Social Connections
+            //-   ul.social-connect
+            //-     li.twitter-connect
+            //-     li.facebook-connect
+            //-     li.github-connect-maybe
+            //- // TODO: Fix profile picture to be able to change picture
+            //- // TODO: Fix formating on form list to make it even
+            //- // TODO: Maybe fix formatting of change pw and delete account to be centered
+            //- // TODO: Maybe add social links
+            .settings-section#delete-section
+              h3.delete__section-title Delete Account
+              p.delete-account WARNING: This will permanently delete your account and all your saved information.
+              form#settings__delete(class="delete-account-form" method="post" action="/settings/delete-account")
+                .form-group#delete
+                  label(for='deletePassword') Password
+                  input#delete-password.form-control(type='password' name='deletePassword')
+                .form-group#delete
+                  label(for='confirmDeletePassword') Confirm Password
+                  input#delete-password.form-control(type='password' name='confirmDeletePassword')
+                .btn__delete-container
+                  button.btn.delete-account-btn Delete Account

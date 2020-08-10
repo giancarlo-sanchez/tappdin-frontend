@@ -1,0 +1,39 @@
+extends layout.pug
+block content
+  head
+    link(rel="stylesheet" href="/styles/brewery.css")
+  .brewery__main
+    .brewery__info-container
+      .brewery__info-content
+        .brewery__info-top
+          .brewery__info-basic
+            .brewery__info-label
+              img.brewery__image(src=brewery.image)
+              .brewery__info-name
+                h1.brewery__name=brewery.name
+                p.brewery__location=brewery.location
+              .brewery__info-stats
+            .brewery__details
+              p.details#reviews
+                if brewery.avgRating
+                  span #{brewery.avgRating}/5
+                    img.symbol(src="https://untappd.akamaized.net/assets/images/ratings/cap-100@2x.png")
+                else
+                  span No ratings yet!
+              p.details#rating #{brewery.numCheckins} review(s)
+              form.details(method="get" action="/search/")
+                input(type="hidden" name="id" value=brewery.id)
+                input(type="hidden" name="query" value=`Beers of ${brewery.name}`)
+                input(type="hidden" name="searchType" value="beersByBrewery")
+                input#beers(type="submit" value=`${brewery.numberOfBeers} Beer(s)`) 
+            .brewery__bottom
+              .brewery__description=brewery.description
+              .box-container
+                a.facebook(href="https://www.facebook.com/")
+                a.twitter(href="https://twitter.com/explore")
+                a.instagram(href="https://www.instagram.com/")
+                a.brewery__link(href=brewery.website)
+      .brewery__sidebar
+
+  main
+  include recent-activity

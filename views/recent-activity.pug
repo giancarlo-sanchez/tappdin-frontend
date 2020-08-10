@@ -1,0 +1,11 @@
+section.recent-activity
+    include checkin
+    head
+        link(rel="stylesheet" type="text/css" href="/styles/recent-activity.css")
+    h2 Recent Activity
+    div#checkin__container
+        if checkins.length
+            each checkin in checkins
+                +checkin(checkin)
+        else
+            p It looks like there aren't any reviews yet

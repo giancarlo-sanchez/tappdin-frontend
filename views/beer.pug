@@ -1,0 +1,41 @@
+extends layout.pug
+block content
+  head
+    link(rel="stylesheet" href="/styles/beer.css")
+  .beer__main
+    .beer__info-container
+      .beer__info-content
+        .beer__info-top
+          .beer__info-basic
+            .beer__info-label
+              img.beer__image(src=beer.image)
+              .beer__info-name
+                h1.beer__name=beer.name
+                // link brewery tag with a tag
+                p.beer__brewery #[a(href=`/breweries/${beer.Brewery.id}`) #{beer.Brewery.name}]
+                p.beer__type=beer.BeerType.typeOfBeer
+              .beer__info-stats
+            .beer__details
+              p.details#abv ABV: #{beer.abv}
+              // TODO: ibu edit
+              p.details#ibu IBU: #{beer.ibu}
+              //TODO: caps review ratings
+              p.details#reviews
+                if beer.avgRating
+                  span 🍺 #{beer.avgRating}/5
+                else
+                  span No ratings yet!
+              p.details#rating #{beer.numCheckins} rating(s)
+            .beer__bottom
+              .beer__desciption=beer.description
+              .box-container
+                a.checkbox(title="Check-in" href=`/checkins/${beer.id}`)
+                //- a.plusbox(href="")
+                // boxes need to be linked
+      .beer__sidebar
+
+        // TODO p.sidebar__info Sidebar stuff maybe
+        //TODO: sidebar?
+
+  main
+  include recent-activity

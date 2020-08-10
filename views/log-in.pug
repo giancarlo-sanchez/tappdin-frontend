@@ -1,0 +1,21 @@
+extends stylesheet
+
+block content
+  head
+    link(rel='stylesheet' type='text/css' href='/styles/log-in.css')
+  div(class="log-in-container")
+    div.log-in__content
+      div(class="errors-container")
+        if errorMessage
+          p=errorMessage
+      h2.log-in__logo TAPPDIN
+          p.log-in__quote Drink Responsibly
+      form(class="log-in-form" method="post" action="/users/log-in")
+        input(type="hidden" name="_csrf" value=csrfToken)
+        include form-elements.pug
+        button.btn.btn-primary(type='submit' id="login") Log In
+      button.btn.btn-primary(id="demo-login") Demo Login
+      a(href='/sign-up') Don't have an account? Sign up here.
+  script( defer src="js/demo-user.js")
+
+  //- include footer
